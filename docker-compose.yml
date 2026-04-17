@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: archangel_postgres
+    environment:
+      POSTGRES_DB: archangel_demo
+      POSTGRES_USER: archangel
+      POSTGRES_PASSWORD: archangel_dev
+    ports:
+      - "5433:5432"
+    volumes:
+      - archangel_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U archangel -d archangel_demo"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  archangel_pgdata:

@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: archangel-demo-server
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:socket_app --host 0.0.0.0 --port $PORT
+    plan: free
+    healthCheckPath: /api/auth/login
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: archangel-db
+          property: connectionString
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DEMO_MODE
+        value: "true"
+      - key: FRONTEND_URL
+        value: "*"
+
+databases:
+  - name: archangel-db
+    databaseName: archangel_demo
+    plan: free

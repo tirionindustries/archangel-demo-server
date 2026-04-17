@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+python-socketio
+sqlalchemy
+asyncpg
+psycopg2-binary
+alembic
+pgvector
+google-genai
+python-jose[cryptography]
+bcrypt
+python-dotenv
+httpx
+pydantic
+pydantic-settings
+python-multipart
+aiofiles
