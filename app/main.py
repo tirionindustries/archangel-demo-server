@@ -67,6 +67,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Archangel Demo API", version="1.0.0", lifespan=lifespan)
 
+
+@app.get("/api/health", tags=["health"])
+async def health() -> dict:
+    return {"status": "ok"}
+
+
 _origins = ["*"] if settings.frontend_url == "*" else [settings.frontend_url]
 app.add_middleware(
     CORSMiddleware,
